@@ -11,6 +11,7 @@ const Course = () => {
     setCourseId(id);
   }
   return (
+  
     <div className='container-fluid  container-subject'>
       <div className='col-md-12 title-section mb-5'>
         <div className="row g-0 ">
@@ -29,9 +30,10 @@ const Course = () => {
       </div>
       <hr style={{border:" 1px dashed black"}}></hr>
       <div className='mt-5 section-contentc'>
-          <ListCourse setCourseId={getCourseIdHandler}/> 
+          <ListCourse getCourseId={getCourseIdHandler}/> 
       </div>
     </div>
+   
     );
 };
 export default Course ;

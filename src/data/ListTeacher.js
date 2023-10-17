@@ -24,7 +24,7 @@ const ListTeacher = ({getTeacherId}) => {
     return (
         <div className='table-box  overflow-scroll'>
             {/* <Button variant="dark edit" onClick={getSubjects}>Refresh List</Button> */}
-            <table className="table" id="subject">
+            <table className="table table-striped" id="subject">
                 <thead>
                     <tr height="50px">
                         <th>#</th>

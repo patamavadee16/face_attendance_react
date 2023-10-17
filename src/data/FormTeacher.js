@@ -3,7 +3,7 @@ import {Form,Alert,InputGroup,Button,ButtonGroup,Col} from "react-bootstrap";
 import teacherServices from '../services/teacher.services';
 
 
-const FormTeacher = ({id,setSubjectId}) => {
+const FormTeacher = ({id,setTeacherId}) => {
   const [name,setName] = useState("");
   const [username,setUsername] = useState("");
   const [password,setPasword] = useState("");
@@ -25,7 +25,7 @@ const FormTeacher = ({id,setSubjectId}) => {
     try {
       if(id !== undefined && id !==""){
         await teacherServices.updateSubject(id,newTeacher);
-        setSubjectId("");
+        setTeacherId("");
         setMessage({error:false,msg:"Update successfully!"});
       }else{
         await teacherServices.addTeacher(newTeacher);

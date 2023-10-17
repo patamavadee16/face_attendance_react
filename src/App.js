@@ -8,6 +8,7 @@ import Subject from './pages/Subject.jsx';
 import Teacher from './pages/Teacher.jsx';
 import Course from './pages/Course.jsx';
 import Each from './pages/Each.jsx';
+import User from "./pages/User.jsx"
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Teacher"element={<Teacher/>}/>
         <Route path="/Course"element={<Course/>}/>
         <Route path="/Each"element={<Each/>}/>
+        <Route path='/User'element={<User/>}/>
       </Routes>
       </Sidebar>
     </BrowserRouter> 

@@ -6,13 +6,13 @@ import {
     addDoc,
     updateDoc,
     deleteDoc,
-    doc
+    doc,setDoc
 }from "firebase/firestore";
 const courseCollectionRef = collection(db,"course");
 class courseDataService{
     addCourse = (newSubject) =>{
         console.log("isssssssssssss",newSubject.code);
-        return addDoc(courseCollectionRef,newSubject);
+        return addDoc(collection(db,"course"),newSubject)
         // addDoc(collection(db,"course",newSubject.code,"section",newSubject.sec,),newSubject);
     };
 
@@ -34,5 +34,8 @@ class courseDataService{
         const courseDoc = doc(db,"course",id);
         return getDoc(courseDoc);
     }
+    getAllCourse=()=>{
+        return getDocs(courseCollectionRef);
+    };
 }
  export default new courseDataService();

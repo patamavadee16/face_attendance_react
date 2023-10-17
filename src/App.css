@@ -208,3 +208,10 @@ border-radius: 20px;
 .input-group-sub{
   display: flex;
 }
+/* table{
+  background: #76C6D1;
+  width:100opx;
+  height: 100px;
+  overflow: hidden;
+  overflow-y: scroll;
+} */

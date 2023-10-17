@@ -3,7 +3,7 @@ import {Form,Alert,InputGroup,Button,Dropdown,Col} from "react-bootstrap";
 import teacherServices from '../services/teacher.services';
 import subjectServices from '../services/subject.services';
 import courseServices from '../services/course.services';
-const FormCourse = ({id,setSubjectId}) => {
+const FormCourse = ({id,setCourseId}) => {
   
   //Teacher//
   const [name,setName] = useState("");
@@ -78,7 +78,7 @@ const FormCourse = ({id,setSubjectId}) => {
       try {
           if(id !== undefined && id !==""){
               await courseServices.updateCourse(id,newSubject);
-              setSubjectId("");
+              setCourseId("");
               setMessage({error:false,msg:"Update successfully!"});
           }else{
               await courseServices.addCourse(newSubject);
@@ -90,6 +90,28 @@ const FormCourse = ({id,setSubjectId}) => {
           // setSubjectEng("");
           // setSubjectThai("");
       };
+      const editHandler = async(id)=>{
+        setMessage("");
+          try {
+            const docSnap = await courseServices.getCourse(id);
+            console.log("the record is:", docSnap.data());
+            
+            setSubjectCode(docSnap.data().code);
+            setSubjectEng(docSnap.data().titleEng);
+            setSubjectThai(docSnap.data().titleTH);
+            setSec(docSnap.data().sec);
+            setName(docSnap.data().name);
+ 
+          } catch (err) {
+            setMessage({error:true,msg:err.message});
+          }
+      }
+      useEffect(()=>{
+        console.log("the id here is : ", id);
+          if(id !== undefined && id !== ""){
+            editHandler(id);
+          }
+        },[id]);
   return (
     <Form className='form-input-subject' onSubmit={handleSubmit}>
                        {message?.msg && (
