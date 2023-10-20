@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react';
 import {Form,Alert,InputGroup,Button,ButtonGroup,Col} from "react-bootstrap";
 import teacherServices from '../services/teacher.services';
-import  {ListTeacher} from './ListTeacher';
-import refreshPage from './ListTeacher'
-
+import  ListTeacher from './ListTeacher';
+import getTeacher from './ListTeacher'
+import ReactDOM from 'react-dom';
 const FormTeacher = ({id,setTeacherId}) => {
   const [name,setName] = useState("");
   const [username,setUsername] = useState("");
@@ -30,7 +30,7 @@ const FormTeacher = ({id,setTeacherId}) => {
       }else{
         await teacherServices.addTeacher(newTeacher);
         setMessage({error: false,msg:"added sucessfully!"});
-        refreshPage()
+        // ReactDOM.render(<ListTeacher />, document.getElementById('root'));
         }}catch (err){
       setMessage({error :true,msg:err.message});
       }

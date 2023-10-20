@@ -8,6 +8,7 @@ import {
     collection,
     addDoc,
 }from "firebase/firestore";
+import ListCourse from './ListCourse';
 const FormCourse = ({id,setCourseId}) => {
 
   //input file csv//
@@ -141,6 +142,7 @@ const handleOnSubmit = (e) => {
               await courseServices.updateCourse(id,newSubject);
               setCourseId("");
               setMessage({error:false,msg:"Update successfully!"});
+    
           }else{
               await courseServices.addCourse(newSubject);
               handleOnSubmit(e);

@@ -3,10 +3,10 @@ import {Button} from "react-bootstrap";
 import teacherServices from '../services/teacher.services';
 import { RiDeleteBinLine} from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
-
+import { TfiReload} from "react-icons/tfi";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 const ListTeacher = ({getTeacherId}) => {
-    const [subjects,setTeacher]= useState([]);
+    const [teachers,setTeacher]= useState([]);
     useEffect(()=>{
         getTeacher();
     },[]);
@@ -27,8 +27,8 @@ const ListTeacher = ({getTeacherId}) => {
     }
     return (
         <div className='table-box'>
-            {/* <Button variant="dark edit" onClick={getSubjects}>Refresh List</Button> */}
-            <table className="table table-striped" id="subject">
+            <TfiReload onClick={getTeacher}/>
+            <table className="table table-striped" id="teacher">
                 <thead>
                     <tr height="50px">
                         <th>#</th>
@@ -41,7 +41,7 @@ const ListTeacher = ({getTeacherId}) => {
                 </thead>
                 
                 <tbody >
-                {subjects.map((doc,index)=>{
+                {teachers.map((doc,index)=>{
                     return(
                         <tr key={doc.id} height="50px">    
                             <td>{index+1}</td>
@@ -74,3 +74,4 @@ const ListTeacher = ({getTeacherId}) => {
 };
 
 export default ListTeacher ;
+export const getTeacher = ()=>{}

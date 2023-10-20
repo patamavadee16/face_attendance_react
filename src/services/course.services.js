@@ -26,7 +26,7 @@ class courseDataService{
     updateCourse= (id,updateSubject)=>{
         console.log(updateSubject)
         const courseDoc = doc(db,"course",id);
-        return updateDoc(courseDoc,{    code: updateSubject.code,
+        return updateDoc(courseDoc,{code: updateSubject.code,
             teacher: updateSubject.teacherName,
             sec: updateSubject.sec,
             titleEng: updateSubject.titleEng,

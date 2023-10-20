@@ -27,7 +27,7 @@ const Teacher = () => {
                 </div>
             </div>
             <hr style={{border:" 1px dashed black"}}></hr>
-            <div className='col-md-12 mt-5'> 
+            <div className='col-md-12 mt-1'> 
                 <div className='section-content'>
                     <ListTeacher getTeacherId={getTeacherIdHandler}/> 
                 </div>
