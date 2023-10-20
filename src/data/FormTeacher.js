@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import {Form,Alert,InputGroup,Button,ButtonGroup,Col} from "react-bootstrap";
 import teacherServices from '../services/teacher.services';
-
+import  {ListTeacher} from './ListTeacher';
+import refreshPage from './ListTeacher'
 
 const FormTeacher = ({id,setTeacherId}) => {
   const [name,setName] = useState("");
   const [username,setUsername] = useState("");
   const [password,setPasword] = useState("");
-  // const [flag,ssetFlag] = useState(true);
   const [message,setMessage] = useState({error:false,msg:""});
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +30,7 @@ const FormTeacher = ({id,setTeacherId}) => {
       }else{
         await teacherServices.addTeacher(newTeacher);
         setMessage({error: false,msg:"added sucessfully!"});
+        refreshPage()
         }}catch (err){
       setMessage({error :true,msg:err.message});
       }
@@ -55,7 +56,9 @@ const FormTeacher = ({id,setTeacherId}) => {
         editHandler();
       }
     },[id]);
+    
   return (
+    <div>
     <Form className='form-input-subject' onSubmit={handleSubmit}>
         {message?.msg && (
       <Alert className='col-md-6'
@@ -115,7 +118,9 @@ const FormTeacher = ({id,setTeacherId}) => {
           <Button variant="primary" type="Submit" className='input-box' >
             Add/ Update
           </Button></div></div>
-    </Form>          
+    </Form>         
+
+    </div>
   );
 };
 export default FormTeacher;

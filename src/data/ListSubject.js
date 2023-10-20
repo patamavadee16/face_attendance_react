@@ -67,4 +67,4 @@ const ListSubject = ({getSubjectId}) => {
     );
 };
 
-export default ListSubject;
+export default   ListSubject;

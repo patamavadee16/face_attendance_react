@@ -1,24 +1,41 @@
 
-import React, { useState } from 'react';
+import React, { useState ,useRef} from 'react';
 import {db} from "../firebase-config.js"
 import {
     collection,
-    getDocs,
-    getDoc,
     addDoc,
-    updateDoc,
-    deleteDoc,
-    doc
 }from "firebase/firestore";
 const Each = () => {
-    const [file, setFile] = useState();
+    const [file, setFile] = useState("");
+    const inputRef = useRef(null);
     const [array, setArray] = useState([]);
     const fileReader = new FileReader();
     const handleOnChange = (e) => {
+      // setFile(null);
+      console.log("dddd",e.target.files[0])
       setFile(e.target.files[0]);
+      // console.log(e.target.files[0])
+    };
+
+
+    const handleFileChange = event => {
+      const fileObj = event.target.files && event.target.files[0];
+      if (!fileObj) {
+        return;
+      }
+  
+      console.log('fileObj is', fileObj);
     };
   
+  
+    const resetFileInput = () => {
+      // 👇️ reset input value
+      inputRef.current.value = null;
+    };
+  
+  
     const csvFileToArray = string => {
+   
         const strtrim = string.trim();
         // console.log(strtrim)
       const csvHeader = strtrim.slice(0, strtrim.indexOf("\n")).split(",");
@@ -45,12 +62,15 @@ const Each = () => {
         return obj;
       });
       setArray(array);
-      // console.log(array[1]);
+      setFile("")
+      console.log(file);
       var docRef = collection(db,'course',"04622201","students");
       array.map((item,index)=>{
-        console.log(item)
+        // console.log(item)
         addDoc(docRef,item)
       })
+      
+      // setArray([])
     };
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -58,15 +78,22 @@ const Each = () => {
           fileReader.onload = function (event) {
             const text = event.target.result;
             csvFileToArray(text);
+            console.log(text)
           };
           fileReader.readAsText(file);
+        
         }
-       
+        
       };
       const headerKeys = Object.keys(Object.assign({}, ...array));
     return (
         <div>
-              <label className='label-file' ><input  type={"file"} id={"csvFileInput"} accept={".csv"} onChange={handleOnChange}/>  </label>
+          <div>
+        <input ref={inputRef} type="file" onChange={handleFileChange} />
+  
+        <button onClick={resetFileInput}>Reset file input</button>
+      </div>
+              <label className='label-file' ><input  type={"file"} id={"csvFileInput"} accept={".csv"} onChange={handleOnChange} />  </label>
               <button className="btn-course"onClick={(e) => {handleOnSubmit(e);}}>IMPORT CSV</button>
               <div className="tabel-box">
                 <div className='table-box 'id="please-scroll">
@@ -91,7 +118,8 @@ const Each = () => {
                 </tbody>
              </table>
             </div>
-        </div> </div>
+        </div> 
+        </div>
         
     );
 };

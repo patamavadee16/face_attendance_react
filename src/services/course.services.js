@@ -9,16 +9,28 @@ import {
     doc,setDoc
 }from "firebase/firestore";
 const courseCollectionRef = collection(db,"course");
+
 class courseDataService{
     addCourse = (newSubject) =>{
-        console.log("isssssssssssss",newSubject.code);
-        return addDoc(collection(db,"course"),newSubject)
+        // console.log("newSubject :",newSubject);
+        return setDoc(doc(db, "course",`${newSubject.code}-${newSubject.sec}`), {
+            code: newSubject.code,
+            teacher: newSubject.teacherName,
+            sec: newSubject.sec,
+            titleEng: newSubject.titleEng,
+            titleTH: newSubject.titleTH
+          });
         // addDoc(collection(db,"course",newSubject.code,"section",newSubject.sec,),newSubject);
     };
 
     updateCourse= (id,updateSubject)=>{
+        console.log(updateSubject)
         const courseDoc = doc(db,"course",id);
-        return updateDoc(courseDoc,updateSubject);
+        return updateDoc(courseDoc,{    code: updateSubject.code,
+            teacher: updateSubject.teacherName,
+            sec: updateSubject.sec,
+            titleEng: updateSubject.titleEng,
+            titleTH:updateSubject.titleTH});
     };
 
     deleleCourse=(id)=>{
@@ -27,15 +39,22 @@ class courseDataService{
     }
 
     getAllCourse=()=>{
-        return getDocs(courseCollectionRef);
+        return getDocs(collection(db,"course"));
     };
 
     getCourse=(id)=>{
         const courseDoc = doc(db,"course",id);
         return getDoc(courseDoc);
     }
-    getAllCourse=()=>{
-        return getDocs(courseCollectionRef);
-    };
+    getAllStudent=(docId)=>{
+        console.log("docId",docId)
+        return getDocs(collection(db,"course",docId,"students"));
+    }
+    // getDataCourse=(docId)=>{
+    //     console.log("data",docId)
+    //     const courseDoc=doc(db,"course",docId);
+    //     return getDoc(courseDoc);
+    // }
+
 }
  export default new courseDataService();

@@ -21,7 +21,7 @@ const User = ({getCourseId}) => {
         getCourses();
     }
     return (
-        <div className='container-fluid  container-subject'>
+        <div className='a'>
 ppppppppppppppppppppp
     </div>
     );

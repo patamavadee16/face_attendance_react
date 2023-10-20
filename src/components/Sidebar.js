@@ -33,7 +33,7 @@ const Sidebar = ({children}) => {
                         </div> 
                     </div>
                
-                    <div>{children} </div>
+                    <div className='a'>{children} </div>
                 </div>
             </div>
         </div>

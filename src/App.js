@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Sidebar from './components/Sidebar';
@@ -9,6 +8,7 @@ import Teacher from './pages/Teacher.jsx';
 import Course from './pages/Course.jsx';
 import Each from './pages/Each.jsx';
 import User from "./pages/User.jsx"
+import Student from "./pages/Student"
 function App() {
   return (
     <div className="App">
@@ -22,6 +22,8 @@ function App() {
         <Route path="/Course"element={<Course/>}/>
         <Route path="/Each"element={<Each/>}/>
         <Route path='/User'element={<User/>}/>
+        <Route path='/Student/:docId' element={<Student/>}/>
+        
       </Routes>
       </Sidebar>
     </BrowserRouter> 

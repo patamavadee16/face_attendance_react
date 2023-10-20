@@ -10,7 +10,11 @@ const ListTeacher = ({getTeacherId}) => {
     useEffect(()=>{
         getTeacher();
     },[]);
-
+      
+  function refreshPage() {
+    console.log("a")
+  }
+  
     const getTeacher =async()=>{
         const data = await teacherServices.getAllTeacher();
         console.log(data.docs);
@@ -22,7 +26,7 @@ const ListTeacher = ({getTeacherId}) => {
         getTeacher();
     }
     return (
-        <div className='table-box  overflow-scroll'>
+        <div className='table-box'>
             {/* <Button variant="dark edit" onClick={getSubjects}>Refresh List</Button> */}
             <table className="table table-striped" id="subject">
                 <thead>
@@ -69,4 +73,4 @@ const ListTeacher = ({getTeacherId}) => {
     );
 };
 
-export default ListTeacher;
+export default ListTeacher ;

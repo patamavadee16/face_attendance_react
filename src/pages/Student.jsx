@@ -3,57 +3,68 @@ import {Button} from "react-bootstrap";
 import courseDataService from "../services/course.services"
 import { RiDeleteBinLine} from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
-import { Link} from "react-router-dom";
-const ListCourse = ({getCourseId}) => {
-    const [courses,setCourses]= useState([]);
+import {useParams } from 'react-router-dom';
+const Student = ({getCourseId,props}) => {
+    
+    const {docId} = useParams();
+
+    const [students,setStudents]= useState([]);
+    const [code,setData]= useState("");
     useEffect(()=>{
-        getCourses();
+        getStudents();
+        getDataCourse();
+        
     },[]);
 
-    const getCourses =async()=>{
-        const data = await courseDataService.getAllCourse();
-        console.log(data.docs.data);
-        setCourses(data.docs.map((doc => ({...doc.data(),id:doc.id}))));
+    const getStudents =async()=>{
+        const data = await courseDataService.getAllStudent(docId);
+        console.log("sssss",docId);
+        setStudents(data.docs.map((doc => ({...doc.data(),id:doc.id}))));
+    };
+    const getDataCourse =async()=>{
+        const data = await courseDataService.getCourse(docId);
+        setData(data.data().code);
     };
 
     const deleteHandler = async(id) =>{
         await courseDataService.deleleCourse(id);
-        getCourses();
+        getStudents();
     }
     
     return (
 
         <div className='table-box'>
+            <div>
+            {code}
+               
+            </div>
             {/* <Button variant="dark edit" onClick={getSubjects}>Refresh List</Button> */}
             <table className="table table-striped" id="subject">
                 <thead>
                     <tr height="50px">
                         <th>#</th>
-                        <th>รหัสวิชา</th>
-                        <th>ชื่อวิชา (ภาษาอังกฤษ)</th>
-                        <th>ชื่อวิชา (ภาษาไทย)</th>
-                        <th>กลุ่มเรียน</th>
-                        <th>ผู้สอน</th>
-                        <th>รายชื่อนักศึกษา</th>
+                        <th>เลขที่</th>
+                        <th>รหัสนักศึกษา</th>
+                        <th>ชื่อนามสกุล</th>
                         <th>แก้ไข</th>
                         <th>ลบ</th>
                     </tr>
                 </thead>
                 
                 <tbody >
-                {courses.map((doc,index)=>{
+                {students.map((doc,index)=>{
                     return(
                         <tr key={doc.id} height="50px">    
                             <td>{index+1}</td>
-                            <td>{doc.code}</td>
-                            <td>{doc.titleEng}</td>
-                            <td>{doc.titleTH}</td>
-                            <td>{doc.sec}</td>
-                            <td>{doc.teacher}</td>
-                            <td>        
-                                <Link to={`/Student/${doc.id}`}>ตรวจสอบข้อมูล
+                            <td>{doc.no}</td>
+                            <td>{doc.studentId}</td>
+                            <td>{doc.name}</td>
+                            {/* <td>{doc.sec}</td>
+                            <td>{doc.teacher}</td> */}
+                            {/* <td>        
+                                <Link to='/Student'>ตรวจสอบข้อมูล
                                 </Link>
-                            </td>
+                            </td> */}
                             <td>
                                 <Button
                                 variant="warning"
@@ -79,4 +90,4 @@ const ListCourse = ({getCourseId}) => {
     );
 };
 
-export default ListCourse ;
+export default Student ;
