@@ -155,7 +155,7 @@ const FormTeacher = ({id,setTeacherId,getTeacherId}) => {
         </div>
       </div>
       <hr style={{border:" 1px dashed black"}}></hr>
-      <div className='col-md-12 mt-1'> 
+      <div className='col-md-12 mt-5'> 
         <div className='section-content'>
           <div className='table-box '>
             <table className="table table-striped mt-2 table-boxx" id="teacher">

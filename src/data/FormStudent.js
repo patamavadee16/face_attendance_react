@@ -4,33 +4,34 @@ import courseDataService from "../services/course.services"
 import { RiDeleteBinLine} from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
 import {useParams } from 'react-router-dom';
-import book from "../assets/book.png"
+import student from "../assets/student.png";
 import {Form,Alert,InputGroup,Button} from "react-bootstrap";
-const FormStudent = ({id,setSubjectId,getCourseId,props}) => {
+const FormStudent = ({id,setSubjectId}) => {
+    const {docId} = useParams();
 
+    // student //
+    const [students,setStudents]= useState([]);
     const [studentName,setStudentName] = useState("");
     const [studentId,setStudentId] = useState("")
     const [message,setMessage] = useState({error:false,msg:""});
     const handleSubmit = async (e) => {
       e.preventDefault();
       setMessage("");
-      if (code === ""|| titleEng === "" ||titleTH==="" ){
+      if (studentId === ""|| studentName === ""  ){
         setMessage({error:true ,msg:"กรอกข้อมูลให้ครบ"});
         return ;
       }
-      const newSubject ={
-        code,
-        titleEng,
-        titleTH,
+      const newStudent ={
+        studentId,studentName
       };
-      console.log(newSubject);
+      console.log(newStudent);
       try {
         if(id !== undefined && id !==""){
-          await subjectServices.updateSubject(id,newSubject);
-            setSubjectId("");
+          await courseDataService.updateStudent(id,newStudent);
+            // setSubjectId("");
             setMessage({error:false,msg:"Update successfully!"});
         }else{
-          await subjectServices.addSubjects(newSubject);
+          await courseDataService.addStudent(docId,newStudent);
             setMessage({error: false,msg:"added sucessfully!"});
         }}catch (err){
             setMessage({error :true,msg:err.message});
@@ -46,6 +47,7 @@ const FormStudent = ({id,setSubjectId,getCourseId,props}) => {
         console.log("the record is:", docSnap.data());
         setStudentName(docSnap.data().name);
         setStudentId(docSnap.data().studentId);
+        setSubjectId(id)
       } catch (err) {
         setMessage({error:true,msg:err.message});
         }
@@ -56,12 +58,12 @@ const FormStudent = ({id,setSubjectId,getCourseId,props}) => {
         editHandler();
       }
     },[id]);
-    const {docId} = useParams();
-
-    const [students,setStudents]= useState([]);
+    // course //
     const [code,setSubjectCode] = useState("");
     const [titleEng,setSubjectEng] = useState("");
     const [titleTH,setSubjectThai] = useState("");
+    const [sec,setSec] = useState("");
+    const [teacherName,setTeacherName] = useState("");
     useEffect(()=>{
         getStudents();
         getDataCourse();
@@ -78,10 +80,12 @@ const FormStudent = ({id,setSubjectId,getCourseId,props}) => {
         setSubjectCode(data.data().code);
         setSubjectEng(data.data().titleEng);
         setSubjectThai(data.data().titleTH);
+        setSec(data.data().sec);
+        setTeacherName(data.data().teacher)
     };
 
     const deleteHandler = async(id) =>{
-        await courseDataService.deleleCourse(id);
+        await courseDataService.deleleStudent(docId,id);
         getStudents();
     }
     
@@ -91,143 +95,120 @@ const FormStudent = ({id,setSubjectId,getCourseId,props}) => {
                  <div className="row g-0 ">
                     <div className='col-md-3 title-box'>
                         <div className='title-icon'>
-                            <img src={book} style={{ width: 90, height: 90 }}/>
+                            <img src={student} style={{ width: 90, height: 90 }}/>
                         </div>
                         <div className='title'>
-                            <h2 style={{color:'#A3A09F' }}>รายวิชา</h2>
+                            <h2 style={{color:'#A3A09F' }}>นักศึกษา</h2>
                         </div> 
                     </div> 
                     <div className='col-md-9 form-box '>
-                    <Form className='form-input-subject' onSubmit={handleSubmit}>
-        {message?.msg && (
-      <Alert className='col-md-6'
-       variant={message?.error ? "danger" : "success"}
-       dismissible
-       onClose={() => setMessage("")}
-      >
-        {message?.msg}
-       </Alert>
-      )}
-      <div className='row mt-3'>
-        <div className='col-md-4'>
-          <Form.Group  controlId="studentName">
-            <InputGroup className='input-group'>
-              <Form.Control
-              className='input-box'
-              type="text"
-              placeholder="รหัสนักศึกษา"
-              value={studentId}
-              required
-              onChange={(e) => setSubjectCode(e.target.value)}
-              />
-            </InputGroup>
-          </Form.Group></div>
-        <div className='col-md-4 '>
-          <Form.Group  controlId="studentId">
-            <InputGroup className='input-group'>
-              <Form.Control
-               className='input-box'
-               type="text"
-               placeholder="ชื่อ นามสกุล"
-               value={studentName}
-               required
-               onChange={(e) => setSubjectEng(e.target.value)}
-               />
-            </InputGroup>
-          </Form.Group>
-        </div>
-        <div className='col-md-4'>
-        <Button variant="primary" type="Submit" className='input-box' style={{background:"#76C6D1",borderColor:"#76C6D1"}}>
-            บันทึก
-          </Button>
-          </div>
-      </div>
-      <div className='row mt-3'>
-        {/* <div className='col-md-6'>
-          <Form.Group  controlId="SubjectThai">
-            <InputGroup className='required'>
-              <Form.Control
-               className='input-box required'
-               type="text"
-               placeholder="ชื่อวิชา (ภาษาไทย)"
-               value={titleTH}
-               required
-                onChange={(e) => setSubjectThai(e.target.value)}
-              />
-            </InputGroup>
-          </Form.Group>   
-        </div> */}
-        {/* <div className='col-md-6'>
-          <Button variant="primary" type="Submit" className='input-box' style={{background:"#76C6D1",borderColor:"#76C6D1"}}>
-            บันทึก
-          </Button>
-        </div>  */}
-      </div>
-    </Form>
+                        <Form className='form-input-subject' onSubmit={handleSubmit}>
+                            {message?.msg && (
+                            <Alert className='col-md-6'
+                                variant={message?.error ? "danger" : "success"}
+                                dismissible
+                                onClose={() => setMessage("")}
+                            >
+                            {message?.msg}
+                            </Alert>
+                            )}
+                            <div className="row" >
+                                <h5  className='col-md-2 '>{code}</h5>
+                                <h5 className='col-md-5'>{titleEng}</h5>
+                                <h5 className='col-md-5'>{titleTH}</h5>
+                    
+                            </div>
+                            <div className="row" >
+                                <h5 className='col-md-2'>กลุ่มที่: {sec}</h5>
+                                <h5 className='col-md-5'>อาจารย์ผู้สอน : {teacherName}</h5>
+                                <h5 className='col-md-5'>จำนวนนักศึกษา : {students.length}</h5>
+                            </div>
+                            <div className='row mt-3'>
+                                <div className='col-md-4'>
+                                    <Form.Group  controlId="studentName">
+                                        <InputGroup className='input-group'>
+                                            <Form.Control
+                                            className='input-box'
+                                            type="text"
+                                            placeholder="รหัสนักศึกษา"
+                                            value={studentId}
+                                            required
+                                            onChange={(e) => setStudentId(e.target.value)}
+                                            />
+                                        </InputGroup>
+                                    </Form.Group>
+                                </div>
+                                <div className='col-md-4 '>
+                                    <Form.Group  controlId="studentId">
+                                        <InputGroup className='input-group'>
+                                            <Form.Control
+                                            className='input-box'
+                                            type="text"
+                                            placeholder="ชื่อ นามสกุล"
+                                            value={studentName}
+                                            required
+                                            onChange={(e) => setStudentName(e.target.value)}
+                                            />
+                                        </InputGroup>
+                                    </Form.Group>
+                                </div>
+                                <div className='col-md-4'>
+                                    <Button variant="primary" type="Submit" className='input-box' style={{background:"#76C6D1",borderColor:"#76C6D1"}}>
+                                    บันทึก
+                                    </Button>
+                                </div>
+                            </div>
+                        </Form>
                     </div>
                 </div> 
-                <h4>{titleEng}</h4>
-                <h4>{titleTH}</h4>
-                <h4>{code}</h4>
-            
-
-               
             </div>
             <hr style={{border:" 1px dashed black"}}></hr>
             <div className='col-md-12 mt-5'> 
                 <div className='section-contentc '>
-                <div className='table-box'>
-            <table className="table table-striped" id="subject">
-                <thead>
-                    <tr height="50px">
-                        <th>#</th>
-                        <th>เลขที่</th>
-                        <th>รหัสนักศึกษา</th>
-                        <th>ชื่อนามสกุล</th>
-                        <th>แก้ไข</th>
-                        <th>ลบ</th>
-                    </tr>
-                </thead>
-                
-                <tbody >
-                {students.map((doc,index)=>{
-                    return(
-                        <tr key={doc.id} height="50px">    
-                            <td>{index+1}</td>
-                            <td>{doc.no}</td>
-                            <td>{doc.studentId}</td>
-                            <td>{doc.name}</td>
-                            {/* <td>{doc.sec}</td>
-                            <td>{doc.teacher}</td> */}
-                            {/* <td>        
-                                <Link to='/Student'>ตรวจสอบข้อมูล
-                                </Link>
-                            </td> */}
-                            <td>
-                                <Button
-                                variant="warning"
-                                className="edit"
-                                onClick={(e) =>editHandler(docId,doc.id)}
-                                ><GrEdit/>
-                                </Button>
-                            </td>
-                            <td>
-                                <Button
-                                className="delete"
-                                variant="danger"
-                                onClick={(e) => deleteHandler(doc.id)}
-                                ><RiDeleteBinLine/>
-                                </Button>
-                            </td>
-                        </tr>
-                    );
-                })}
-                </tbody>
-            </table>
-        </div>  
+                    <div className='table-box'>
+                        <table className="table table-striped" id="subject">
+                            <thead>
+                                <tr height="50px">
+                                    <th>#</th>
+                                    <th>เลขที่</th>
+                                    <th>รหัสนักศึกษา</th>
+                                    <th>ชื่อนามสกุล</th>
+                                    <th>แก้ไข</th>
+                                    <th>ลบ</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            {students.map((doc,index)=>{
+                                return(
+                                    <tr key={doc.id} height="50px">    
+                                        <td>{index+1}</td>
+                                        <td>{doc.no}</td>
+                                        <td>{doc.studentId}</td>
+                                        <td>{doc.name}</td>
+                                        <td>
+                                            <Button
+                                            variant="warning"
+                                            className="edit"
+                                            onClick={(e) =>editHandler(docId,doc.id)}
+                                            ><GrEdit/>
+                                            </Button>
+                                        </td>
+                                        <td>
+                                            <Button
+                                            className="delete"
+                                            variant="danger"
+                                            onClick={(e) => deleteHandler(doc.id)}
+                                            ><RiDeleteBinLine/>
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                            </tbody>
+                        </table>
+                    </div>  
                 </div>
             </div>
-     
          </div>
     );
 };
