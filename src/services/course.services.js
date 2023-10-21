@@ -50,6 +50,28 @@ class courseDataService{
         console.log("docId",docId)
         return getDocs(collection(db,"course",docId,"students"));
     }
+    addStudent = (docId,newSubject) =>{
+        return setDoc(doc(db, "course",`${newSubject.code}-${newSubject.sec}`), {
+            code: newSubject.code,
+            teacher: newSubject.teacherName,
+            sec: newSubject.sec,
+            titleEng: newSubject.titleEng,
+            titleTH: newSubject.titleTH
+          });
+    };
+    updateStudent= (id,updateSubject)=>{
+        console.log(updateSubject)
+        const courseDoc = doc(db,"course",id);
+        return updateDoc(courseDoc,{code: updateSubject.code,
+            teacher: updateSubject.teacherName,
+            sec: updateSubject.sec,
+            titleEng: updateSubject.titleEng,
+            titleTH:updateSubject.titleTH});
+    };
+    getStudent=(docId,id)=>{
+        const courseDoc = doc(db,"course",docId,"students",id);
+        return getDoc(courseDoc);
+    }
     // getDataCourse=(docId)=>{
     //     console.log("data",docId)
     //     const courseDoc=doc(db,"course",docId);

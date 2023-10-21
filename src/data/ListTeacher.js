@@ -4,17 +4,12 @@ import teacherServices from '../services/teacher.services';
 import { RiDeleteBinLine} from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
 import { TfiReload} from "react-icons/tfi";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 const ListTeacher = ({getTeacherId}) => {
     const [teachers,setTeacher]= useState([]);
     useEffect(()=>{
         getTeacher();
     },[]);
       
-  function refreshPage() {
-    console.log("a")
-  }
-  
     const getTeacher =async()=>{
         const data = await teacherServices.getAllTeacher();
         console.log(data.docs);
@@ -26,9 +21,9 @@ const ListTeacher = ({getTeacherId}) => {
         getTeacher();
     }
     return (
-        <div className='table-box'>
-            <TfiReload onClick={getTeacher}/>
-            <table className="table table-striped" id="teacher">
+        <div className='table-box '>
+            <TfiReload onClick={getTeacher} className="ml-5" />
+            <table className="table table-striped mt-2 table-boxx" id="teacher">
                 <thead>
                     <tr height="50px">
                         <th>#</th>

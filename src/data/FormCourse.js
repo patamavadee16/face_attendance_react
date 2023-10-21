@@ -327,14 +327,9 @@ const handleOnSubmit = (e) => {
           </Form.Group>
        
         </div>
-        {/* <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="formFile"></input>
         <div className='col-md-3'>
-              <button className="btn-course"onClick={(e) => {handleOnSubmit(e);}}>IMPORT CSV</button>
-        </div> */}
-        <div className='col-md-3'>
-          <Button variant="primary" type="Submit" className='input-box' >
-              Add/ Update
+          <Button variant="primary" type="Submit" className='input-box' style={{background:"#76C6D1",borderColor:"#76C6D1"}}>
+            บันทึก
           </Button>
         </div>
       </div>

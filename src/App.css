@@ -196,7 +196,10 @@ border-radius: 20px;
   height: 410px;
   overflow: hidden;
   overflow-y: scroll;
-
+  text-align: end;
+}
+table{
+  text-align: center;
 }
 /* .test{
   background: #76C6D1;

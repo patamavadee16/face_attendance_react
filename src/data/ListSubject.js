@@ -21,7 +21,6 @@ const ListSubject = ({getSubjectId}) => {
     }
     return (
         <div className='table-box 'id="please-scroll" >
-            {/* <Button variant="dark edit" onClick={getSubjects}>Refresh List</Button> */}
             <table className="table table-striped" id="subject">
                 <thead>
                     <tr height="50px">

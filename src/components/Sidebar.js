@@ -21,8 +21,8 @@ const Sidebar = ({children}) => {
                                 
                     </div>
                 </div>
-                <div className="col-md-11 col-sm-7 content-container" >
-                <div className='col-md-5 col-sm-7 top-bar '>
+                <div className="col-md-11 content-container" >
+                <div className='col-md-11 top-bar '>
                         <div className='navbar-icon'>
                             <img src={logo} style={{ width: 90, height: 90 }}/>
                         </div>
