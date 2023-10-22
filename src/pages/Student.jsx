@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormStudent from '../data/FormStudent';
 const Student = () => {
+    const [ID,setID] = useState("");
     return (
      
-            <FormStudent/>
+            <FormStudent  id={ID} setID={setID}/>
        
     );
 };

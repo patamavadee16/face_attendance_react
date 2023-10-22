@@ -1,12 +1,11 @@
 import  React ,{ useEffect ,useState} from "react";
-import subjectServices from '../services/subject.services';
 import courseDataService from "../services/course.services"
 import { RiDeleteBinLine} from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
 import {useParams } from 'react-router-dom';
 import student from "../assets/student.png";
 import {Form,Alert,InputGroup,Button} from "react-bootstrap";
-const FormStudent = ({id,setSubjectId}) => {
+const FormStudent = ({id,setID}) => {
     const {docId} = useParams();
 
     // student //
@@ -27,8 +26,8 @@ const FormStudent = ({id,setSubjectId}) => {
       console.log(newStudent);
       try {
         if(id !== undefined && id !==""){
-          await courseDataService.updateStudent(id,newStudent);
-            // setSubjectId("");
+          await courseDataService.updateStudent(docId,id,newStudent);
+            setID("");
             setMessage({error:false,msg:"Update successfully!"});
         }else{
           await courseDataService.addStudent(docId,newStudent);
@@ -39,6 +38,8 @@ const FormStudent = ({id,setSubjectId}) => {
             setSubjectCode("");
             setSubjectEng("");
             setSubjectThai("");
+            setID("");
+            getStudents();
         };
     const editHandler = async(docId,id)=>{
       setMessage("");
@@ -47,7 +48,7 @@ const FormStudent = ({id,setSubjectId}) => {
         console.log("the record is:", docSnap.data());
         setStudentName(docSnap.data().name);
         setStudentId(docSnap.data().studentId);
-        setSubjectId(id)
+        setID(id)
       } catch (err) {
         setMessage({error:true,msg:err.message});
         }
@@ -55,7 +56,7 @@ const FormStudent = ({id,setSubjectId}) => {
     useEffect(()=>{
       console.log("the id here is : ", id);
       if(id !== undefined && id !== ""){
-        editHandler();
+        editHandler(docId,id);
       }
     },[id]);
     // course //
@@ -88,6 +89,13 @@ const FormStudent = ({id,setSubjectId}) => {
         await courseDataService.deleleStudent(docId,id);
         getStudents();
     }
+    // const [query, setQuery] = useState("")
+
+    // function search(e){
+    //     e.preventDefault()
+    //     setQuery(e.target.value)
+
+    // }
     
     return (
         <div className='container-fluid  container-subject'>
@@ -165,12 +173,22 @@ const FormStudent = ({id,setSubjectId}) => {
             <hr style={{border:" 1px dashed black"}}></hr>
             <div className='col-md-12 mt-5'> 
                 <div className='section-contentc '>
+                {/* <div className="w-full max-w-xl flex mx-auto p-20 text-xl">
+            <input
+                type="text"
+                className="w-full placeholder-gray-400 text-gray-900 p-4"
+                placeholder="Search"
+                onChange={search}
+                value={query}
+            />
+            <button className="bg-white p-4">🔍</button>
+        </div> */}
                     <div className='table-box'>
                         <table className="table table-striped" id="subject">
                             <thead>
                                 <tr height="50px">
                                     <th>#</th>
-                                    <th>เลขที่</th>
+                                    {/* <th>เลขที่</th> */}
                                     <th>รหัสนักศึกษา</th>
                                     <th>ชื่อนามสกุล</th>
                                     <th>แก้ไข</th>
@@ -182,7 +200,7 @@ const FormStudent = ({id,setSubjectId}) => {
                                 return(
                                     <tr key={doc.id} height="50px">    
                                         <td>{index+1}</td>
-                                        <td>{doc.no}</td>
+                                        {/* <td>{doc.no}</td> */}
                                         <td>{doc.studentId}</td>
                                         <td>{doc.name}</td>
                                         <td>

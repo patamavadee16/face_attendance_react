@@ -6,23 +6,44 @@ import {
     addDoc,
     updateDoc,
     deleteDoc,
-    doc,setDoc
+    doc,setDoc,orderBy,query
 }from "firebase/firestore";
 const courseCollectionRef = collection(db,"course");
 
 class courseDataService{
-    addCourse = (newSubject) =>{
+    addCourse = (newSubject,array) =>{
         // console.log("newSubject :",newSubject);
-        return setDoc(doc(db, "course",`${newSubject.code}-${newSubject.sec}`), {
+        return  addDoc(collection(db, "course"), {
             code: newSubject.code,
             teacher: newSubject.teacherName,
             sec: newSubject.sec,
             titleEng: newSubject.titleEng,
             titleTH: newSubject.titleTH
-          });
+          }).then(function(docRef) {
+            var doc = collection(db,'course',docRef.id,"students");
+            var list = newSubject.parsed;
+            console.log("add",newSubject.parsed);
+            console.log(list,"list");
+            list.map((item,index)=>{
+                // console.log(item)
+                addDoc(doc,item)
+                });
+            console.log("Document written with ID: ", docRef.id);
+            
+            
+        });
+        
         // addDoc(collection(db,"course",newSubject.code,"section",newSubject.sec,),newSubject);
     };
-
+    addListStudent=(array,id)=>{
+        console.log(id)
+        console.log(array)
+        var docRef = collection(db,'course',id,"students");
+    return array.map((item,index)=>{
+    addDoc(docRef,item)
+    })
+       
+    }
     updateCourse= (id,updateSubject)=>{
         console.log(updateSubject)
         const courseDoc = doc(db,"course",id);
@@ -48,7 +69,10 @@ class courseDataService{
     }
     getAllStudent=(docId)=>{
         console.log("docId",docId)
-        return getDocs(collection(db,"course",docId,"students"));
+        const sectionsCollectionRef = collection(db,"course",docId,"students")
+        const q = query(sectionsCollectionRef, orderBy('studentId'))
+        const querySnapshot = getDocs(q);
+        return querySnapshot
     }
     addStudent = (docId,newStudent) =>{
         return addDoc(collection(db, "course",docId,"students",), {
