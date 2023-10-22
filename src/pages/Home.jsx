@@ -37,9 +37,9 @@ const Home = () => {
                 <Link to={item.path} key={index} className=" col-md-3 menu-home " activeclassName="active-home" >
                     <div className=' menu-box'>
                         <div className='icon-home'>
-                            <img className='img-home 'src={item.Image} alt="" style={{height:'80px',width:'80px'}}/>
+                            <img className='img-home 'src={item.Image} alt="" style={{height:'70px',width:'70px'}}/>
                         </div>
-                        <div className='title' style={{fontSize:'30px'}}>{item.title} </div>
+                        <div className='title' style={{fontSize:'25px'}}>{item.title} </div>
                     </div>
                 </Link>
             ))}

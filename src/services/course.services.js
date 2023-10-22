@@ -60,7 +60,11 @@ class courseDataService{
     }
 
     getAllCourse=()=>{
-        return getDocs(collection(db,"course"));
+        const CollectionRef = collection(db,"course")
+        const q = query(CollectionRef, orderBy('code'))
+        const querySnapshot = getDocs(q);
+        return querySnapshot
+        // return getDocs(collection(db,"course"));
     };
 
     getCourse=(id)=>{
@@ -78,7 +82,6 @@ class courseDataService{
         return addDoc(collection(db, "course",docId,"students",), {
             name:newStudent.studentName,
             studentId:newStudent.studentId,
-            no:"121"
           });
     };
     updateStudent= (docId,id,updateSubject)=>{

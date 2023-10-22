@@ -24,10 +24,10 @@ const Sidebar = ({children}) => {
                 <div className="col-md-11 content-container" >
                 <div className='col-md-11 top-bar '>
                         <div className='navbar-icon'>
-                            <img src={logo} style={{ width: 90, height: 90 }}/>
+                            <img src={logo} style={{ width: 80, height: 80 }}/>
                         </div>
                         <div className='navbar-title'>
-                            <h1 style={{color:'#A3A09F',marginBottom:'10px'}}>Face Recognition Attendance</h1>
+                            <h2 style={{color:'#A3A09F',marginBottom:'10px'}}>Face Recognition Attendance</h2>
                             <hr style={{border:'solid 2px #D0CECE' ,borderColor:'#D0CECE'}}></hr>
                             <p style={{fontSize:'20px', color:'#A3A09F' }}>Admin</p>
                         </div> 

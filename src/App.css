@@ -61,8 +61,8 @@ main{
   list-style: none;
   position: relative;
   width: 100%;
-  max-height: 110px;
-  min-height: 110px;
+  max-height: 90px;
+  min-height: 90px;
   border-radius: 12px;
   transition: 0.5s;
   align-items: center;
@@ -73,8 +73,8 @@ main{
   font-size: xx-large;
   display: block;
   min-width: 60px;
-  height: 70px;
-  line-height: 60px;
+  height: 60px;
+  line-height: 50px;
   text-align: center;
   color: #fff;
 }
@@ -90,8 +90,8 @@ main{
   width: 100%;
   background:#f6fafd;
   color: #76C6D1;
-  border-top-left-radius:20px ;
-  border-bottom-left-radius:20px ;
+  border-top-left-radius:17px ;
+  border-bottom-left-radius:17px ;
 
 }
 .active::after{
@@ -101,7 +101,7 @@ main{
   right: 0;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 40%;
   box-shadow: 20px -20px 0 #f6fafd;
   
 }
@@ -112,7 +112,7 @@ main{
   right: 0;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 40%;
   box-shadow: 20px 20px 0 #f6fafd;
 }
 /* nav-bar  */
