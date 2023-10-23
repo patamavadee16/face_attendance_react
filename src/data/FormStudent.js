@@ -99,7 +99,7 @@ const FormStudent = ({id,setID}) => {
     
     return (
         <div className='container-fluid  container-subject'>
-            <div className='col-md-12 mb-5 title-section '>
+            <div className='col-md-12 mb-3 title-section '>
                  <div className="row g-0 ">
                     <div className='col-md-3 title-box'>
                         <div className='title-icon'>
@@ -171,10 +171,10 @@ const FormStudent = ({id,setID}) => {
                 </div> 
             </div>
             <hr style={{border:" 1px dashed black"}}></hr>
-            <div className='col-md-12 mt-5'> 
+            <div className='col-md-12 mt-3'> 
                 <div className='section-contentc '>
                 {/* <div className="w-full max-w-xl flex mx-auto p-20 text-xl">
-            <input
+                <input
                 type="text"
                 className="w-full placeholder-gray-400 text-gray-900 p-4"
                 placeholder="Search"
@@ -184,9 +184,9 @@ const FormStudent = ({id,setID}) => {
             <button className="bg-white p-4">🔍</button>
         </div> */}
                     <div className='table-box'>
-                        <table className="table table-striped" id="subject">
+                        <table className="table table-striped " id="subject">
                             <thead>
-                                <tr height="50px">
+                                <tr height="40px">
                                     <th>#</th>
                                     {/* <th>เลขที่</th> */}
                                     <th>รหัสนักศึกษา</th>
@@ -198,7 +198,7 @@ const FormStudent = ({id,setID}) => {
                             <tbody >
                             {students.map((doc,index)=>{
                                 return(
-                                    <tr key={doc.id} height="50px">    
+                                    <tr key={doc.id} height="30px">    
                                         <td>{index+1}</td>
                                         {/* <td>{doc.no}</td> */}
                                         <td>{doc.studentId}</td>

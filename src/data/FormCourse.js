@@ -213,7 +213,7 @@ const [ parsed, setParsed ] = useState({});
   }
   return (
     <div className='container-fluid  container-subject'>
-      <div className='col-md-12 title-section mb-5'>
+      <div className='col-md-12 title-section mb-3'>
         <div className="row g-0 ">
           <div className='col-md-3 title-box'>
             <div className='title-icon'>
@@ -383,12 +383,12 @@ const [ parsed, setParsed ] = useState({});
         </div>
       </div>
       <hr style={{border:" 1px dashed black"}}></hr>
-      <div className='mt-5 section-contentc'>
+      <div className='mt-3 section-contentc'>
       <div className='table-box'>
             {/* <Button variant="dark edit" onClick={getSubjects}>Refresh List</Button> */}
             <table className="table table-striped" id="subject">
                 <thead>
-                    <tr height="50px">
+                    <tr height="40px">
                         <th>#</th>
                         <th>รหัสวิชา</th>
                         <th>ชื่อวิชา (ภาษาอังกฤษ)</th>
@@ -404,7 +404,7 @@ const [ parsed, setParsed ] = useState({});
                 <tbody >
                 {courses.map((doc,index)=>{
                     return(
-                        <tr key={doc.id} height="50px">    
+                        <tr key={doc.id} height="40px">    
                             <td>{index+1}</td>
                             <td>{doc.code}</td>
                             <td>{doc.titleEng}</td>

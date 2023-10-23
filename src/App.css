@@ -61,8 +61,8 @@ main{
   list-style: none;
   position: relative;
   width: 100%;
-  max-height: 90px;
-  min-height: 90px;
+  max-height: 70px;
+  min-height: 70px;
   border-radius: 12px;
   transition: 0.5s;
   align-items: center;
@@ -160,7 +160,7 @@ color: black;
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
-  height:  150px;
+  height:  100px;
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -192,13 +192,14 @@ border-radius: 20px;
 }
 
 .table-box {
-  width:100opx;
-  height: 410px;
-  overflow: hidden;
+  width:100%;
+  height: 350px;
+  /* overflow: hidden; */
   overflow-y: scroll;
+  overflow-x: scroll;
   text-align: end;
 }
-table{
+table {
   text-align: center;
 }
 /* .test{

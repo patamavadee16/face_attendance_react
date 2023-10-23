@@ -77,7 +77,7 @@ const FormTeacher = ({id,setTeacherId,getTeacherId}) => {
   }
   return (
     <div className='container-fluid  container-subject'>
-      <div className='col-md-12 title-section mb-5'>
+      <div className='col-md-12 title-section mb-3'>
         <div className="row g-0 ">
             <div className='col-md-3 title-box'>
                 <div className='title-icon'>
@@ -155,12 +155,12 @@ const FormTeacher = ({id,setTeacherId,getTeacherId}) => {
         </div>
       </div>
       <hr style={{border:" 1px dashed black"}}></hr>
-      <div className='col-md-12 mt-5'> 
+      <div className='col-md-12 mt-3'> 
         <div className='section-content'>
           <div className='table-box '>
             <table className="table table-striped mt-2 table-boxx" id="teacher">
                 <thead>
-                    <tr height="50px">
+                    <tr height="40px">
                         <th>#</th>
                         <th>ชื่อ นามสกุล</th>
                         <th> username</th>
@@ -169,11 +169,10 @@ const FormTeacher = ({id,setTeacherId,getTeacherId}) => {
                         <th>ลบ</th>
                     </tr>
                 </thead>
-                
                 <tbody >
                 {teachers.map((doc,index)=>{
                     return(
-                        <tr key={doc.id} height="50px">    
+                        <tr key={doc.id} height="40px">    
                             <td>{index+1}</td>
                             <td>{doc.name}</td>
                             <td>{doc.username}</td>

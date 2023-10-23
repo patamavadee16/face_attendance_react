@@ -80,7 +80,7 @@ const FormSubject = ({id,setSubjectId,getSubjectId}) => {
   }
   return (
     <div className='container-fluid  container-subject'>
-      <div className='col-md-12 mb-5 title-section '>
+      <div className='col-md-12 mb-3 title-section '>
         <div className="row g-0 ">
           <div className='col-md-3 title-box'>
             <div className='title-icon'>
@@ -156,12 +156,12 @@ const FormSubject = ({id,setSubjectId,getSubjectId}) => {
         </div>
       </div>
       <hr style={{border:" 1px dashed black"}}></hr>
-      <div className='col-md-12 mt-5'> 
+      <div className='col-md-12 mt-3'> 
         <div className='section-contentc '>
           <div className='table-box 'id="please-scroll" >
               <table className="table table-striped" id="subject">
                 <thead>
-                    <tr height="50px">
+                    <tr height="40px">
                         <th>#</th>
                         <th>รหัสวิชา</th>
                         <th>ชื่อวิชา (ภาษาอังกฤษ)</th>
@@ -174,7 +174,7 @@ const FormSubject = ({id,setSubjectId,getSubjectId}) => {
                 <tbody >
                 {subjects.map((doc,index)=>{
                     return(
-                        <tr key={doc.id} height="50px">    
+                        <tr key={doc.id} height="40px">    
                             <td>{index+1}</td>
                             <td>{doc.code}</td>
                             <td>{doc.titleEng}</td>
