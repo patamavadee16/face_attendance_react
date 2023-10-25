@@ -169,7 +169,7 @@ const FormTeacher = ({id,setTeacherId,getTeacherId}) => {
                         <th>ลบ</th>
                     </tr>
                 </thead>
-                <tbody >
+                <tbody>
                 {teachers.map((doc,index)=>{
                     return(
                         <tr key={doc.id} height="40px">    
