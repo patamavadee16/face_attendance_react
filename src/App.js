@@ -9,13 +9,18 @@ import Course from './pages/Course.jsx';
 import Each from './pages/Each.jsx';
 import User from "./pages/User.jsx"
 import Student from "./pages/Student"
+import Recheck from './pages/Recheck.jsx';
 function App() {
   return (
     <div className="App">
-  
   <BrowserRouter>
-      <Sidebar>
-      <Routes>
+  {/* <Routes>
+  <Route path="/Recheck"element={<Recheck/>}/>
+  </Routes> */}
+
+  <Routes>
+  {/* <Sidebar> */}
+        <Route path="/Recheck"element={<Recheck/>}/>
         <Route path="/"element={<Home/>}/>
         <Route path="/Subject"element={<Subject/>}/>
         <Route path="/Teacher"element={<Teacher/>}/>
@@ -23,9 +28,9 @@ function App() {
         <Route path="/Each"element={<Each/>}/>
         <Route path='/User'element={<User/>}/>
         <Route path='/Student/:docId' element={<Student/>}/>
-        
-      </Routes>
-      </Sidebar>
+        {/* </Sidebar> */}
+        </Routes>
+      
     </BrowserRouter> 
     </div>
   );

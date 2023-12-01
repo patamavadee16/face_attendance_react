@@ -35,10 +35,8 @@ const FormStudent = ({id,setID}) => {
         }}catch (err){
             setMessage({error :true,msg:err.message});
         }
-            setSubjectCode("");
-            setSubjectEng("");
-            setSubjectThai("");
-            setID("");
+            setStudentName("");
+            setStudentId("");
             getStudents();
         };
     const editHandler = async(docId,id)=>{

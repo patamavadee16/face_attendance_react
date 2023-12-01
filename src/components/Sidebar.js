@@ -7,7 +7,7 @@ const Sidebar = ({children}) => {
         <main >
         <div className='container-fluid g-0 sidebar'>
             <div className='row g-0'>
-                <div className="col-md-1 col-sm-5 navigation-container">
+                <div className="col-md-1 navigation-container">
                     <div className='nav-bar '>
                         <ul>
                             {SidebarData.map((item, index) => (

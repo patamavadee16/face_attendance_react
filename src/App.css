@@ -77,6 +77,7 @@ main{
   line-height: 50px;
   text-align: center;
   color: #fff;
+
 }
 
 .link{
@@ -92,6 +93,8 @@ main{
   color: #76C6D1;
   border-top-left-radius:17px ;
   border-bottom-left-radius:17px ;
+
+
 
 }
 .active::after{

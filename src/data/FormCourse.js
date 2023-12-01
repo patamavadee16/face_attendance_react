@@ -366,7 +366,7 @@ const [ parsed, setParsed ] = useState({});
 
                     accept={".csv"}
                     onChange={handleFiles}
-                    required
+                    // required
                     // onChange={(e) => setSubjectThai(e.target.value)}
                     />
                     {/* <label className='label-file' ><input  type={"file"} id={"csvFileInput"} accept={".csv"} onChange={handleOnChange}/>  </label> */}

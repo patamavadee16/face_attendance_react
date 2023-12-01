@@ -3,7 +3,7 @@ import FormCourse from '../data/FormCourse';
 import ListSubject from "../data/ListSubject";
 import book from "../assets/book.png"
 import ListCourse from "../data/ListCourse";
-
+import Sidebar from '../components/Sidebar';
 const Course = () => {
   const [courseId,setCourseId] = useState("");
   const getCourseIdHandler=(id)=>{
@@ -24,8 +24,9 @@ const Course = () => {
     //         </div> 
     //       </div>
     //       <div className='col-md-9 form-box '>
+    <Sidebar>
             <FormCourse id={courseId} setCourseId={setCourseId}/>
-    //       </div>
+   </Sidebar>
     //     </div>
     //   </div>
     //   <hr style={{border:" 1px dashed black"}}></hr>
