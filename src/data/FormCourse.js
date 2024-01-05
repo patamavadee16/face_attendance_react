@@ -132,6 +132,8 @@ const [ parsed, setParsed ] = useState({});
   const handleSelect=(e)=>{
   // console.log(e);
     setSec(e)
+    //เพิ่ม
+    validateSubject(refCode.current.value , e)
   }
  //Course
   const handleSubmit = async (e) => {
@@ -211,6 +213,14 @@ const [ parsed, setParsed ] = useState({});
     await courseServices.deleleCourse(id);
     getCourses();
   }
+  //แจ้งเตือนเมื่อรายวิชานี้มีกลุ่มเรียนนี้อยู่แล้ว
+  const refCode = useRef()
+  const refSec = useRef()
+  const validateSubject = async (code , sec) => {
+    const validate = await courseServices.getValidateCourse(code , sec)
+    if(validate.docs.map((doc) => ({ ...doc.data() })).length) alert("มีคอร์สเรียนนี้อยู่แล้ว")
+  }
+
   return (
     <div className='container-fluid  container-subject'>
       <div className='col-md-12 title-section mb-3'>
@@ -243,8 +253,12 @@ const [ parsed, setParsed ] = useState({});
                       type="text"
                       placeholder="รหัสวิชา"
                       value={code}
+                      ref={refCode}
                       required
-                        // onChange={(e) => setSubjectEng(e.target.value)}
+                        onChange={(e) => {                       
+                          // setSubjectEng(e.target.value)
+                          validateSubject(e.target.value , refSec.current.value)
+                        }}
                       />
                     </InputGroup>
                     <Dropdown 
@@ -259,7 +273,11 @@ const [ parsed, setParsed ] = useState({});
                       {subjects.map((doc,index)=>{
                       return( 
                         <Dropdown.Item
-                        onClick={(e) =>  subjectHandler(doc.id)} >{doc.code}
+                          onClick={(e) =>  {
+                            subjectHandler(doc.id)
+                            validateSubject(doc.code , refSec.current.value)
+                          }} >
+                            {doc.code}
                         </Dropdown.Item>
                         );
                         })}
@@ -303,8 +321,12 @@ const [ parsed, setParsed ] = useState({});
                       type="text"
                       placeholder="กลุ่มเรียน"
                       value={sec}
+                      ref={refSec}
                       required
-                        // onChange={(e) => setSubjectEng(e.target.value)}
+                        onChange={(e) => {
+                          // setSubjectEng(e.target.value)
+                          validateSubject(refCode.current.value , e.target.value)
+                        }}
                       />
                     </InputGroup>
                     <Dropdown 

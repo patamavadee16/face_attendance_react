@@ -144,7 +144,7 @@ const FormTeacher = ({id,setTeacherId,getTeacherId}) => {
                     </Form.Group>
                   </div>
                   <div className='col-md-6'>
-                    <Button variant="primary" type="Submit" className='input-box' style={{background:"#76C6D1",borderColor:"#76C6D1"}}>
+                    <Button variant="primary" type="Submit" className='input-box' style={{background:"#AD8E79",borderColor:"#AD8E79"}}>
                       บันทึก
                     </Button>
                   </div>

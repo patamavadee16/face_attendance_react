@@ -10,6 +10,7 @@ import Each from './pages/Each.jsx';
 import User from "./pages/User.jsx"
 import Student from "./pages/Student"
 import Recheck from './pages/Recheck.jsx';
+import Check from './pages/Check.jsx'
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
 
   <Routes>
   {/* <Sidebar> */}
+        <Route path="/Check"element={<Check/>}/>
         <Route path="/Recheck"element={<Recheck/>}/>
         <Route path="/"element={<Home/>}/>
         <Route path="/Subject"element={<Subject/>}/>

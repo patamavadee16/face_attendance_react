@@ -6,13 +6,12 @@ import {
     addDoc,
     updateDoc,
     deleteDoc,
-    doc,setDoc,orderBy,query
+    doc,setDoc,orderBy,query,where,and
 }from "firebase/firestore";
 const courseCollectionRef = collection(db,"course");
 
 class courseDataService{
     addCourse = (newSubject,array) =>{
-        // console.log("newSubject :",newSubject);
         return  addDoc(collection(db, "course"), {
             code: newSubject.code,
             teacher: newSubject.teacherName,
@@ -32,8 +31,6 @@ class courseDataService{
             
             
         });
-        
-        // addDoc(collection(db,"course",newSubject.code,"section",newSubject.sec,),newSubject);
     };
     addListStudent=(array,id)=>{
         console.log(id)
@@ -64,13 +61,22 @@ class courseDataService{
         const q = query(CollectionRef, orderBy('code'))
         const querySnapshot = getDocs(q);
         return querySnapshot
-        // return getDocs(collection(db,"course"));
     };
 
     getCourse=(id)=>{
         const courseDoc = doc(db,"course",id);
         return getDoc(courseDoc);
     }
+
+    getValidateCourse = (code , sec) => {
+        const courseDoc = collection(db , "course")
+        const wCode = where("code" , "==" , code)
+        const wSec = where("sec" , "==" , sec)
+        const q = query(courseDoc , and(wCode , wSec))
+        const get = getDocs(q)
+        return get
+    }
+
     getAllStudent=(docId)=>{
         console.log("docId",docId)
         const sectionsCollectionRef = collection(db,"course",docId,"students")
@@ -101,11 +107,5 @@ class courseDataService{
         const studentDoc=doc(db,"course",docId,"students",id);
         return deleteDoc(studentDoc);
     }
-    // getDataCourse=(docId)=>{
-    //     console.log("data",docId)
-    //     const courseDoc=doc(db,"course",docId);
-    //     return getDoc(courseDoc);
-    // }
-
 }
  export default new courseDataService();
